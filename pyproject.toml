@@ -1,0 +1,47 @@
+
+# package =====================================================================
+
+[build-system]
+requires = ["setuptools>=70", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# unit tests ==================================================================
+
+[tool.pytest.ini_options]
+minversion = 8.3
+addopts = "-v -r a --showlocals"
+xfail_strict = true
+testpaths = ["tests"]
+python_files = ["test*.py", "Test*.py"]
+norecursedirs = [".git", ".cache", ".tox", ".ropeproject", "build"]
+filterwarnings = [
+  "ignore:invalid escape sequence:SyntaxWarning",
+  "ignore:'pipes':DeprecationWarning:fire",
+]
+
+# static analysis =============================================================
+
+[tool.pylint.main]
+ignore = [
+  ".git", ".venv", ".cache", ".tox", "build", "__pycache__", ".pytest_cache"
+]
+persistent = false
+jobs = 0
+
+[tool.pylint."messages control"]
+disable = [
+  "missing-docstring", "multiple-statements"
+]
+
+[tool.pylint.format]
+max-line-length = 79
+indent-string = '  '
+
+[tool.pylint.design]
+max-args = 8
+max-locals = 20
+max-attributes = 10
+min-public-methods = 1
+
+[tool.pylint.reports]
+output-format = "colorized"
